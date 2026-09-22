@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pousada e Restaurante do Adão — Hospede-se, Saboreie, Celebre</title>
 <meta name="description" content="Pousada e Restaurante do Adão: suítes aconchegantes, restaurante de frutos do mar, coquetéis autorais e pôr do sol inesquecível. Reserve sua mesa ou sua estadia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230E2E4E'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23C2A059'%3E%E2%89%8B%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pousada e Restaurante do Adão — Saboreie a vista. Celebre o momento.">
+<meta property="og:description" content="Suítes aconchegantes, frutos do mar frescos, coquetéis autorais e o pôr do sol mais bonito da região.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1200&auto=format&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E2E4E">
 <!--
   DESIGN SYSTEM (extraído da referência Azure Terrace + .md ausente → tokens reconstruídos)
   --cream:#FAF6EE; --cream-2:#F3EBDD; --navy:#0E2E4E; --navy-2:#14395E;
@@ -159,6 +166,27 @@ footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
 .lightbox button{position:absolute;top:18px;right:22px;background:var(--gold);border:0;color:#fff;font-size:20px;width:44px;height:44px;border-radius:50%;cursor:pointer}
 .reveal{opacity:0;transform:translateY(26px);transition:.7s}
 .reveal.vis{opacity:1;transform:none}
+/* back to top */
+.totop{position:fixed;left:20px;bottom:20px;z-index:60;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:rgba(14,46,78,.92);color:var(--gold-soft);font-size:20px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{background:var(--navy-deep)}
+/* lightbox nav */
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:22px;width:48px;height:48px;border-radius:50%;cursor:pointer;transition:.25s}
+.lb-nav:hover{background:var(--gold);border-color:var(--gold)}
+#lbPrev{left:22px}#lbNext{right:22px}
+#lbCount{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;letter-spacing:.2em}
+/* events banner */
+.events{background:linear-gradient(120deg,var(--navy) 0%,var(--navy-2) 60%,#1E4E7E 100%);color:#EDE3CC;border-radius:var(--radius);padding:46px 40px;display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;position:relative;overflow:hidden}
+.events::before{content:"";position:absolute;right:-70px;top:-70px;width:260px;height:260px;border:1px solid rgba(194,160,89,.4);border-radius:50%}
+.events::after{content:"";position:absolute;right:-30px;top:-30px;width:180px;height:180px;border:1px solid rgba(194,160,89,.25);border-radius:50%}
+.events h3{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.6vw,34px);letter-spacing:.05em;color:#fff}
+.events p{color:#CBB98F;font-weight:300;margin-top:8px;max-width:60ch}
+@media(max-width:640px){.events{grid-template-columns:1fr;text-align:left}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
 /* mobile menu */
 .mmenu{display:none;position:fixed;inset:74px 0 auto 0;background:var(--cream);border-bottom:1px solid var(--line);padding:18px 24px 26px;z-index:49}
 .mmenu.open{display:block}
@@ -181,6 +209,9 @@ footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
   .hero{padding-top:110px}
 }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":["Restaurant","LodgingBusiness"],"name":"Pousada e Restaurante do Adão","servesCuisine":["Frutos do mar","Brasileira"],"priceRange":"$$","telephone":"+55-11-99999-9999","address":{"@type":"PostalAddress","addressLocality":"Rio Grande da Serra","addressRegion":"SP","addressCountry":"BR"},"hasMap":"https://maps.app.goo.gl/9yCmkrTV2Pdp77SQ8","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"312"},"openingHours":["Tu-Su 11:30-23:00"]}
+</script>
 </head>
 <body>
 
@@ -200,7 +231,7 @@ footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
     </div>
     <div class="nav-cta">
       <a class="btn btn-gold" style="padding:12px 24px" href="#reservar">Reservar</a>
-      <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mmenu">☰</button>
     </div>
   </nav>
 </header>
@@ -346,6 +377,20 @@ footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
   </div>
 </section>
 
+<!-- EVENTOS -->
+<section id="eventos" style="padding-top:0">
+  <div class="wrap">
+    <div class="events reveal">
+      <div>
+        <div class="eyebrow" style="justify-content:flex-start;color:var(--gold-soft)">Events • Aniversários • Jantares em grupo</div>
+        <h3 style="margin-top:10px">CELEBRE COM VISTA PARA O MAR</h3>
+        <p>Aniversários, pedidos de casamento e confraternizações para até 60 pessoas no terraço — com menu fechado do chef e brinde ao pôr do sol incluso.</p>
+      </div>
+      <a class="btn btn-gold" href="#reservar" data-tipo="Evento / Aniversário">Pedir proposta</a>
+    </div>
+  </div>
+</section>
+
 <!-- RESERVA + CONTATO -->
 <section id="reservar" class="suites">
   <div class="wrap reserve-grid">
@@ -398,7 +443,7 @@ footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
       <div class="logo" style="margin-bottom:14px"><span class="logo-mark" style="border-color:var(--gold-soft);color:var(--gold-soft)">≋</span><span><b style="color:#fff">DO ADÃO</b><small style="color:var(--gold-soft)">POUSADA • RESTAURANTE</small></span></div>
       <p style="font-weight:300;font-size:14px;max-width:34ch">Onde o encontro vira memória: frutos do mar, coquetéis autorais e o pôr do sol mais bonito da região.</p>
     </div>
-    <div><h4>Quick links</h4><a href="#inicio">Início</a><a href="#cardapio">Cardápio</a><a href="#suites">Suítes</a><a href="#experiencia">Experiência</a><a href="#reservar">Reservas</a></div>
+    <div><h4>Quick links</h4><a href="#inicio">Início</a><a href="#cardapio">Cardápio</a><a href="#suites">Suítes</a><a href="#experiencia">Experiência</a><a href="#eventos">Eventos</a><a href="#reservar">Reservas</a></div>
     <div><h4>Hours</h4><p style="font-size:14px">Seg–Qui • 11h30–22h<br>Sex–Sáb • 11h30–00h<br>Dom • 11h30–18h<br><br>Pousada • recepção 8h–22h</p></div>
   </div>
   <div class="wrap copy"><span>© <span id="year"></span> Pousada e Restaurante do Adão. Todos os direitos reservados.</span><span>Feito com sabor à beira-mar</span></div>
@@ -408,13 +453,20 @@ footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
   <svg viewBox="0 0 24 24" fill="#fff" width="30" height="30"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.9-1.4A10 10 0 1 0 12 2zm5.6 14.1c-.2.7-1.4 1.3-1.9 1.4-.5 0-1 .3-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .6-.5 1.1z"/></svg>
 </a>
 
-<div class="lightbox" id="lightbox"><button id="lbClose" aria-label="Fechar">✕</button><img id="lbImg" src="" alt="Foto ampliada"></div>
+<button class="totop" id="totop" aria-label="Voltar ao topo">↑</button>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Galeria ampliada"><button id="lbClose" aria-label="Fechar">✕</button><button class="lb-nav" id="lbPrev" aria-label="Foto anterior">‹</button><img id="lbImg" src="" alt="Foto ampliada"><button class="lb-nav" id="lbNext" aria-label="Próxima foto">›</button><span id="lbCount"></span></div>
 
 <script>
 const $=s=>document.querySelector(s);
 // menu mobile
 const burger=$('#burger'),mmenu=$('#mmenu');
-burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+burger.addEventListener('click',()=>{
+  const open=mmenu.classList.toggle('open');
+  burger.setAttribute('aria-expanded',open);
+  burger.textContent=open?'✕':'☰';
+});
+addEventListener('keydown',e=>{if(e.key==='Escape'){mmenu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='☰'}});
 mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
 // reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
@@ -443,18 +495,38 @@ $('#bookForm').addEventListener('submit',e=>{
   if(nome.length<2){msg.className='form-msg err';msg.textContent='Informe seu nome para continuar.';return}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.className='form-msg err';msg.textContent='Informe um e-mail válido.';return}
   if(!d.value){msg.className='form-msg err';msg.textContent='Escolha a data da reserva.';return}
-  const txt=`Olá! Quero reservar na Pousada e Restaurante do Adão.%0A%0ANome: ${encodeURIComponent(nome)}%0AE-mail: ${encodeURIComponent(email)}%0AData: ${d.value} às ${$('#fTime').value}%0A${encodeURIComponent($('#fGuests').value)} • ${encodeURIComponent($('#fType').value)}%0AObs: ${encodeURIComponent($('#fMsg').value||'—')}`;
-  msg.className='form-msg ok';msg.textContent=`Obrigado, ${nome.split(' ')[0]}! Abrindo o WhatsApp para confirmar sua reserva...`;
+  const tipo=$('#fType').value;
+  const dataBR=d.value.split('-').reverse().join('/');
+  const txt=`Olá! Quero reservar na Pousada e Restaurante do Adão.%0A%0ANome: ${encodeURIComponent(nome)}%0AE-mail: ${encodeURIComponent(email)}%0AData: ${dataBR} às ${$('#fTime').value}%0A${encodeURIComponent($('#fGuests').value)} • ${encodeURIComponent(tipo)}%0AObs: ${encodeURIComponent($('#fMsg').value||'—')}`;
+  msg.className='form-msg ok';msg.textContent=`Obrigado, ${nome.split(' ')[0]}! Sua pré-reserva (${tipo} • ${dataBR} às ${$('#fTime').value}) está pronta — abrindo o WhatsApp para confirmar...`;
   setTimeout(()=>window.open(`https://wa.me/5511999999999?text=${txt}`,'_blank'),800);
 });
-// lightbox
-const lb=$('#lightbox'),lbImg=$('#lbImg');
-document.querySelectorAll('#gal button').forEach(b=>b.addEventListener('click',()=>{
-  lbImg.src=b.querySelector('img').src.replace('w=900','w=1400');lb.classList.add('open');
-}));
+// lightbox com navegação
+const lb=$('#lightbox'),lbImg=$('#lbImg'),lbCount=$('#lbCount');
+const galImgs=[...document.querySelectorAll('#gal button img')];
+let lbIdx=0;
+function showLb(i){
+  lbIdx=(i+galImgs.length)%galImgs.length;
+  lbImg.src=galImgs[lbIdx].src.replace('w=900','w=1400');
+  lbImg.alt=galImgs[lbIdx].alt;
+  lbCount.textContent=`${lbIdx+1} / ${galImgs.length}`;
+  lb.classList.add('open');
+}
+galImgs.forEach((img,i)=>img.closest('button').addEventListener('click',()=>showLb(i)));
 $('#lbClose').addEventListener('click',()=>lb.classList.remove('open'));
+$('#lbPrev').addEventListener('click',e=>{e.stopPropagation();showLb(lbIdx-1)});
+$('#lbNext').addEventListener('click',e=>{e.stopPropagation();showLb(lbIdx+1)});
 lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open')});
-addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')lb.classList.remove('open');
+  if(e.key==='ArrowLeft')showLb(lbIdx-1);
+  if(e.key==='ArrowRight')showLb(lbIdx+1);
+});
+// voltar ao topo
+const totop=$('#totop');
+addEventListener('scroll',()=>totop.classList.toggle('show',scrollY>700),{passive:true});
+totop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 $('#year').textContent=new Date().getFullYear();
 </script>
 </body>
