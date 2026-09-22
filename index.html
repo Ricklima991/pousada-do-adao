@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pousada e Restaurante do Adão — Hospede-se, Saboreie, Celebre</title>
+<meta name="description" content="Pousada e Restaurante do Adão: suítes aconchegantes, restaurante de frutos do mar, coquetéis autorais e pôr do sol inesquecível. Reserve sua mesa ou sua estadia.">
+<!--
+  DESIGN SYSTEM (extraído da referência Azure Terrace + .md ausente → tokens reconstruídos)
+  --cream:#FAF6EE; --cream-2:#F3EBDD; --navy:#0E2E4E; --navy-2:#14395E;
+  --gold:#C2A059; --gold-2:#A9843C; --ink:#1E3A5F; --muted:#6B7A90;
+  Fontes: Display "Cormorant Garamond" serif | Script "Great Vibes" | Body "Jost" sans
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF6EE; --cream-2:#F2EAD9; --card:#FFFDF8;
+  --navy:#0E2E4E; --navy-2:#14395E; --navy-deep:#0A2138;
+  --gold:#C2A059; --gold-2:#A9843C; --gold-soft:#E9D9B8;
+  --ink:#1E3A5F; --muted:#68798F; --line:#E7DCC8;
+  --shadow:0 20px 60px rgba(14,46,78,.12);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+.serif{font-family:'Cormorant Garamond',serif}
+.script{font-family:'Great Vibes',cursive;font-weight:400}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:500}
+.eyebrow::before,.eyebrow::after{content:"";height:1px;width:64px;background:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;padding:15px 32px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:.3s}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-deep);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-outline{border-color:var(--navy);color:var(--navy);background:transparent}
+.btn-outline:hover{background:var(--navy);color:#fff}
+/* NAV */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:.35s;background:rgba(250,246,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1280px;margin:0 auto;padding:0 24px;height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;line-height:1}
+.logo-mark{width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:20px}
+.logo b{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.22em;color:var(--navy);font-weight:700}
+.logo small{display:block;font-family:'Jost';font-size:9px;letter-spacing:.5em;color:var(--gold-2);font-weight:600}
+.links{display:flex;gap:28px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--navy)}
+.links a{position:relative;padding:6px 0}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);transition:.3s}
+.links a:hover::after,.links a.active::after{width:100%}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.burger{display:none;background:none;border:0;font-size:26px;color:var(--navy);cursor:pointer}
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:130px 0 70px;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,246,238,.97) 0%,rgba(250,246,238,.88) 38%,rgba(250,246,238,.25) 65%,rgba(250,246,238,.05) 100%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;width:100%}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(42px,5.2vw,68px);line-height:1.02;letter-spacing:.04em;color:var(--navy)}
+.hero .script{font-size:clamp(30px,3.4vw,44px);color:var(--gold-2);display:block;margin-top:6px}
+.hero p.lead{margin:18px 0 26px;max-width:46ch;color:#3D5470;font-weight:300;font-size:17px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-proof{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+.hero-proof div strong{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--navy)}
+.hero-proof div span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero-card{background:rgba(255,253,248,.85);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(6px)}
+.hero-card .ph{border-radius:12px;overflow:hidden;aspect-ratio:4/4.4}
+.hero-card .ph img{width:100%;height:100%;object-fit:cover}
+.hero-card-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px}
+.stars{color:var(--gold);letter-spacing:2px}
+/* trust strip */
+.strip{background:var(--navy);color:#EDE3CC}
+.strip-inner{max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;gap:26px;justify-content:space-between;flex-wrap:wrap;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.strip b{color:var(--gold-soft)}
+/* sections */
+section{padding:84px 0}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 46px}
+.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.4vw,44px);letter-spacing:.06em;color:var(--navy);margin:12px 0 8px;text-transform:uppercase;font-weight:600}
+.sec-head p{color:var(--muted);font-weight:300}
+/* dishes */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.dish{text-align:center}
+.dish .plate{border-radius:50%;overflow:hidden;aspect-ratio:1/1;border:6px solid #fff;box-shadow:var(--shadow);background:#fff}
+.dish .plate img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.dish:hover .plate img{transform:scale(1.07)}
+.dish h3{font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:.08em;margin-top:16px;color:var(--navy)}
+.dish p{font-size:13px;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:16px}
+/* suites */
+.suites{background:#FFFDF8;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.35s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .im{aspect-ratio:16/10;overflow:hidden}
+.card .im img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.card:hover .im img{transform:scale(1.06)}
+.card-body{padding:26px}
+.card-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy)}
+.card-body .price{color:var(--gold-2);font-family:'Cormorant Garamond',serif;font-size:22px;margin:6px 0 10px}
+.card-body ul{list-style:none;margin:14px 0 20px;display:grid;gap:8px;font-size:14px;color:#415873}
+.card-body ul li::before{content:"◆ ";color:var(--gold);font-size:10px}
+/* cocktails + sunset */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
+.cocktails{padding:44px 38px}
+.cock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.cock{text-align:center}
+.cock .ph{aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:var(--cream-2)}
+.cock .ph img{width:100%;height:100%;object-fit:cover}
+.cock h4{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.06em;color:var(--navy);margin-top:10px}
+.cock span{font-size:11px;color:var(--muted);font-style:italic}
+.sunset{position:relative;min-height:480px;display:flex;align-items:flex-end;color:#fff}
+.sunset img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sunset::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,33,56,.88),rgba(10,33,56,.15) 60%)}
+.sunset-inner{position:relative;padding:40px;z-index:1}
+.sunset-inner h3{font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.15;letter-spacing:.04em}
+.sunset-inner p{color:#E9DCC2;font-weight:300;margin:12px 0 20px;max-width:38ch}
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.review{background:#FFFDF8;border:1px solid var(--line);border-radius:14px;padding:28px;position:relative}
+.review .q{font-family:'Cormorant Garamond',serif;font-size:56px;line-height:.5;color:var(--gold);display:block;margin:14px 0 6px}
+.review p{font-style:italic;font-family:'Cormorant Garamond',serif;font-size:18px;color:#334B66}
+.review-foot{display:flex;align-items:center;gap:12px;margin-top:18px}
+.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft)}
+/* gallery */
+.gal{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;grid-auto-rows:200px;gap:12px}
+.gal button{border:0;border-radius:12px;overflow:hidden;cursor:zoom-in;padding:0;background:#ddd;position:relative}
+.gal img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gal button:hover img{transform:scale(1.06)}
+/* reserve */
+.reserve-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.form-card{background:#FFFDF8;border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:var(--shadow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);font-weight:600;display:block;margin:14px 0 6px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:13px 14px;font-family:'Jost';font-size:15px;color:var(--ink);outline:none;transition:.25s}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(194,160,89,.18)}
+textarea{min-height:90px;resize:vertical}
+.form-msg{font-size:14px;margin-top:14px;display:none;padding:12px 14px;border-radius:8px}
+.form-msg.ok{display:block;background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.form-msg.err{display:block;background:#FDECEA;color:#7A1F1A;border:1px solid #F5B7B1}
+.contact-list{list-style:none;display:grid;gap:14px;margin:22px 0;color:#3D5470}
+.contact-list a{color:var(--navy);font-weight:500;border-bottom:1px dotted var(--gold)}
+.map{border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:300px;background:#dde5ee}
+.map iframe{width:100%;height:320px;border:0;display:block}
+/* footer */
+footer{background:var(--navy);color:#CBD7E6;padding:56px 0 26px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+.foot-grid h4{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
+.foot-grid a{display:block;padding:5px 0;font-size:14px}
+.foot-grid a:hover{color:#fff}
+.copy{border-top:1px solid rgba(255,255,255,.14);margin-top:36px;padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8EA2BC}
+/* float + lightbox */
+.wpp{position:fixed;right:20px;bottom:20px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.25);transition:.3s}
+.wpp:hover{transform:scale(1.08)}
+.lightbox{position:fixed;inset:0;background:rgba(10,33,56,.9);display:none;place-items:center;z-index:80;padding:24px}
+.lightbox.open{display:grid}
+.lightbox img{max-width:min(920px,94vw);max-height:84vh;border-radius:12px;border:6px solid #fff}
+.lightbox button{position:absolute;top:18px;right:22px;background:var(--gold);border:0;color:#fff;font-size:20px;width:44px;height:44px;border-radius:50%;cursor:pointer}
+.reveal{opacity:0;transform:translateY(26px);transition:.7s}
+.reveal.vis{opacity:1;transform:none}
+/* mobile menu */
+.mmenu{display:none;position:fixed;inset:74px 0 auto 0;background:var(--cream);border-bottom:1px solid var(--line);padding:18px 24px 26px;z-index:49}
+.mmenu.open{display:block}
+.mmenu a{display:block;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+@media(max-width:1020px){
+  .links{display:none}.nav .btn{display:none}.burger{display:block}
+  .hero-grid,.split,.reserve-grid{grid-template-columns:1fr}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .grid3,.reviews{grid-template-columns:1fr 1fr}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:180px}
+  .sunset{min-height:420px}
+}
+@media(max-width:640px){
+  section{padding:64px 0}
+  .grid3,.reviews,.form-row{grid-template-columns:1fr}
+  .grid4{grid-template-columns:1fr 1fr;gap:18px}
+  .cock-grid{grid-template-columns:repeat(2,1fr)}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .foot-grid{grid-template-columns:1fr}
+  .hero{padding-top:110px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#inicio" class="logo" aria-label="Pousada e Restaurante do Adão">
+      <span class="logo-mark">≋</span>
+      <span><b>DO ADÃO</b><small>POUSADA • RESTAURANTE</small></span>
+    </a>
+    <div class="links">
+      <a href="#inicio" class="active">Início</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#suites">Suítes</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-gold" style="padding:12px 24px" href="#reservar">Reservar</a>
+      <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
+    </div>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu">
+  <a href="#inicio">Início</a><a href="#cardapio">Cardápio</a><a href="#suites">Suítes</a>
+  <a href="#experiencia">Experiência</a><a href="#galeria">Galeria</a><a href="#reservar">Reservar</a><a href="#contato">Contato</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio" style="padding-bottom:40px">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1920&auto=format&fit=crop" alt="Terraço com vista para o mar ao pôr do sol"></div>
+  <div class="wrap hero-grid">
+    <div class="reveal vis">
+      <div class="eyebrow" style="justify-content:flex-start">Pousada • Restaurante • Mirante</div>
+      <h1 style="margin-top:14px">SABOREIE A VISTA.<br>CELEBRE O MOMENTO.</h1>
+      <span class="script">Hospitalidade elevada com sabor de mar</span>
+      <p class="lead">A Pousada e Restaurante do Adão une suítes aconchegantes, frutos do mar frescos e coquetéis autorais — com aquele pôr do sol que só quem vive à beira d'água conhece. A poucos minutos do centro de Rio Grande da Serra.</p>
+      <div class="hero-actions">
+        <a href="#reservar" class="btn btn-navy">Reservar sua experiência</a>
+        <a href="#cardapio" class="btn btn-outline">Ver cardápio</a>
+      </div>
+      <div class="hero-proof">
+        <div><strong>4.9 ★</strong><br><span> Avaliação dos hóspedes</span></div>
+        <div><strong>+12 mil</strong><br><span> Pratos servidos / ano</span></div>
+        <div><strong>Pôr do sol</strong><br><span> Vista panorâmica</span></div>
+      </div>
+    </div>
+    <div class="hero-card reveal vis">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1000&auto=format&fit=crop" alt="Mesa posta no terraço"></div>
+      <div class="hero-card-row">
+        <span><b class="serif" style="font-size:18px;color:var(--navy)">Terraço panorâmico</b><br><small style="color:var(--muted)">Almoço • Jantar • Hospedagem</small></span>
+        <span class="stars">★★★★★</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><div class="strip-inner">
+  <span>◆ <b>Check-in</b> 14h • Check-out 12h</span>
+  <span>◆ <b>Restaurante</b> Ter–Dom • 11h30–23h</span>
+  <span>◆ <b>Vista</b> pôr do sol todos os dias</span>
+  <span>◆ <b>Local</b> Rio Grande da Serra • SP</span>
+</div></div>
+
+<!-- CARDÁPIO -->
+<section id="cardapio">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Menu highlights</div>
+      <h2>Destaques do Cardápio</h2>
+      <p>Receitas da casa com ingredientes frescos, finalização no azeite de ervas e aquele toque do chef Adão.</p>
+    </div>
+    <div class="grid4">
+      <div class="dish reveal"><div class="plate"><img loading="lazy" src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=800&auto=format&fit=crop" alt="Lagosta grelhada"></div><h3>LAGOSTA GRELHADA</h3><p>Manteiga de limão • Alho • Ervas</p></div>
+      <div class="dish reveal"><div class="plate"><img loading="lazy" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Vieiras seladas"></div><h3>VIEIRAS SELADAS</h3><p>Purê de couve-flor • Pancetta crocante</p></div>
+      <div class="dish reveal"><div class="plate"><img loading="lazy" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=800&auto=format&fit=crop" alt="Robalo mediterrâneo"></div><h3>ROBALO MEDITERRÂNEO</h3><p>Relish de azeitonas • Funcho • Citrus</p></div>
+      <div class="dish reveal"><div class="plate"><img loading="lazy" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop" alt="Linguine de frutos do mar"></div><h3>LINGUINE DO MAR</h3><p>Camarões • Tomate cereja • Vinho branco</p></div>
+    </div>
+    <div style="text-align:center;margin-top:36px" class="reveal">
+      <a class="btn btn-navy" href="#reservar">Quero provar — reservar mesa</a>
+    </div>
+  </div>
+</section>
+
+<!-- SUÍTES -->
+<section class="suites" id="suites">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Pousada</div>
+      <h2>Suítes para desacelerar</h2>
+      <p>Quartos claros, roupa de cama macia e café da manhã caseiro incluso. Escolha o seu refúgio.</p>
+    </div>
+    <div class="grid3">
+      <article class="card reveal"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=900&auto=format&fit=crop" alt="Suíte Mirante"></div>
+        <div class="card-body"><h3>Suíte Mirante</h3><div class="price">R$ 329 <small style="font-size:14px;color:var(--muted)">/ diária p/ 2</small></div>
+        <ul><li>Varanda com vista</li><li>Cama queen + ar-condicionado</li><li>Café da manhã incluso</li></ul>
+        <a class="btn btn-outline" style="width:100%" href="#reservar" data-tipo="Hospedagem — Suíte Mirante">Reservar suíte</a></div></article>
+      <article class="card reveal"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=900&auto=format&fit=crop" alt="Suíte Família"></div>
+        <div class="card-body"><h3>Suíte Família</h3><div class="price">R$ 429 <small style="font-size:14px;color:var(--muted)">/ diária até 4</small></div>
+        <ul><li>Ampla • ideal p/ crianças</li><li>Smart TV + frigobar</li><li>Café da manhã incluso</li></ul>
+        <a class="btn btn-navy" style="width:100%" href="#reservar" data-tipo="Hospedagem — Suíte Família">Reservar suíte</a></div></article>
+      <article class="card reveal"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=900&auto=format&fit=crop" alt="Chalé Pôr do Sol"></div>
+        <div class="card-body"><h3>Chalé Pôr do Sol</h3><div class="price">R$ 499 <small style="font-size:14px;color:var(--muted)">/ diária p/ 2</small></div>
+        <ul><li>Privativo • deck externo</li><li>Banheira + vista oeste</li><li>Café + espumante de boas-vindas</li></ul>
+        <a class="btn btn-outline" style="width:100%" href="#reservar" data-tipo="Hospedagem — Chalé Pôr do Sol">Reservar chalé</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIÊNCIA / COQUETÉIS -->
+<section id="experiencia">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Signature cocktails</div><h2>Brinde ao pôr do sol</h2></div>
+    <div class="split reveal">
+      <div class="cocktails">
+        <p style="color:var(--muted);font-weight:300">Carta autoral do nosso bar: frescor, cítricos e ervas da horta.</p>
+        <div class="cock-grid">
+          <div class="cock"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=600&auto=format&fit=crop" alt="Pôr do sol do Adão"></div><h4>PÔR DO ADÃO</h4><span>Vodka • Pêssego • Espumante</span></div>
+          <div class="cock"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=600&auto=format&fit=crop" alt="Brisa Azul"></div><h4>BRISA AZUL</h4><span>Gin • Curaçau • Tônica</span></div>
+          <div class="cock"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1541544181051-e46607bc22a4?q=80&w=600&auto=format&fit=crop" alt="Coral Crush"></div><h4>CORAL CRUSH</h4><span>Tequila • Grapefruit • Agave</span></div>
+          <div class="cock"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=600&auto=format&fit=crop" alt="Névoa do Mar"></div><h4>NÉVOA DO MAR</h4><span>Rum • Pepino • Hortelã</span></div>
+        </div>
+      </div>
+      <div class="sunset">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop" alt="Pôr do sol visto do terraço">
+        <div class="sunset-inner">
+          <h3>O PÔR DO SOL TEM GOSTO MELHOR AQUI</h3>
+          <p>Quando o sol toca o horizonte, o terraço vira palco: taças ao alto, brisa do mar e sabores que ficam na memória.</p>
+          <a class="btn btn-gold" href="#reservar">Descobrir a experiência</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section style="padding-top:0" id="avaliacoes">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">What our guests say</div><h2>O que dizem os hóspedes</h2></div>
+    <div class="reviews">
+      <div class="review reveal"><span class="q">“</span><p>A vista é de tirar o fôlego e a comida é ainda melhor. Nosso refúgio favorito!</p>
+        <div class="review-foot"><img class="avatar" src="https://i.pravatar.cc/100?img=47" alt="Sophia"><div><b>Sophia L.</b><br><span class="stars">★★★★★</span></div></div></div>
+      <div class="review reveal"><span class="q">“</span><p>Cada detalhe é perfeito — do coquetel ao atendimento. Um achado escondido.</p>
+        <div class="review-foot"><img class="avatar" src="https://i.pravatar.cc/100?img=12" alt="Michael"><div><b>Michael T.</b><br><span class="stars">★★★★★</span></div></div></div>
+      <div class="review reveal"><span class="q">“</span><p>Celebramos nosso aniversário aqui e foi inesquecível. Equipe nota mil!</p>
+        <div class="review-foot"><img class="avatar" src="https://i.pravatar.cc/100?img=32" alt="Jessica"><div><b>Jessica M.</b><br><span class="stars">★★★★★</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Moments</div><h2>Momentos do Adão</h2><p>Toque para ampliar.</p></div>
+    <div class="gal reveal" id="gal">
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=900&auto=format&fit=crop" alt="Prato da casa"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop" alt="Salão do restaurante"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=900&auto=format&fit=crop" alt="Brinde no terraço"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop" alt="Mesa ao pôr do sol"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=900&auto=format&fit=crop" alt="Piscina e mar"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?q=80&w=900&auto=format&fit=crop" alt="Jantar em família"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1533777857889-4b7bd5dfa4d3?q=80&w=900&auto=format&fit=crop" alt="Coquetel autoral"></button>
+      <button><img loading="lazy" src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=900&auto=format&fit=crop" alt="Pousada ao entardecer"></button>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA + CONTATO -->
+<section id="reservar" class="suites">
+  <div class="wrap reserve-grid">
+    <div class="reveal">
+      <div class="eyebrow" style="justify-content:flex-start">Reserve your table • stay</div>
+      <h2 class="serif" style="font-size:clamp(30px,3.4vw,44px);color:var(--navy);letter-spacing:.04em;margin:12px 0">RESERVE SUA MESA OU SUÍTE</h2>
+      <p style="color:var(--muted);font-weight:300">Preencha ao lado — confirmamos em minutos pelo WhatsApp. Para grupos acima de 10 pessoas ou eventos, chame direto.</p>
+      <div class="form-card" style="margin-top:22px">
+        <form id="bookForm" novalidate>
+          <div class="form-row">
+            <div><label for="fName">Nome completo</label><input id="fName" name="nome" placeholder="Seu nome" required></div>
+            <div><label for="fMail">E-mail</label><input id="fMail" type="email" name="email" placeholder="voce@email.com" required></div>
+          </div>
+          <div class="form-row">
+            <div><label for="fDate">Data</label><input id="fDate" type="date" name="data" required></div>
+            <div><label for="fTime">Horário</label><input id="fTime" type="time" name="hora" value="19:30" required></div>
+          </div>
+          <div class="form-row">
+            <div><label for="fGuests">Pessoas</label><select id="fGuests" name="pessoas"><option>1 pessoa</option><option selected>2 pessoas</option><option>3 pessoas</option><option>4 pessoas</option><option>5-8 pessoas</option><option>Evento / grupo 10+</option></select></div>
+            <div><label for="fType">Tipo de reserva</label><select id="fType" name="tipo"><option>Mesa no restaurante</option><option>Hospedagem — Suíte Mirante</option><option>Hospedagem — Suíte Família</option><option>Hospedagem — Chalé Pôr do Sol</option><option>Evento / Aniversário</option></select></div>
+          </div>
+          <div><label for="fMsg">Pedido especial (opcional)</label><textarea id="fMsg" name="msg" placeholder="Aniversário, vista preferida, restrições alimentares..."></textarea></div>
+          <button type="submit" class="btn btn-navy" style="width:100%;margin-top:18px">Reservar agora</button>
+          <div class="form-msg" id="formMsg"></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center">Ao reservar você será redirecionado ao WhatsApp com os dados prontos. Sem pagamento agora.</p>
+        </form>
+      </div>
+    </div>
+    <div class="reveal" id="contato">
+      <div class="eyebrow" style="justify-content:flex-start">Get in touch</div>
+      <h2 class="serif" style="font-size:clamp(30px,3.4vw,44px);color:var(--navy);letter-spacing:.04em;margin:12px 0">COMO CHEGAR</h2>
+      <ul class="contact-list">
+        <li>📍 Estrada do Mirante — Rio Grande da Serra • SP <a href="https://maps.app.goo.gl/9yCmkrTV2Pdp77SQ8" target="_blank" rel="noopener">Abrir no Google Maps</a></li>
+        <li>🕐 Restaurante: Ter–Dom • 11h30–23h | Pousada: todos os dias</li>
+        <li>📞 <a href="tel:+5511999999999">+55 (11) 99999-9999</a> &nbsp; ✉️ <a href="mailto:contato@pousadadoadao.com.br">contato@pousadadoadao.com.br</a></li>
+        <li>📸 <a href="#" onclick="return false">@pousadadoadao</a> — marque seu pôr do sol #PordoAdao</li>
+      </ul>
+      <div class="map"><iframe title="Mapa Pousada e Restaurante do Adão" loading="lazy" src="https://www.google.com/maps?q=-23.7496073,-46.4002247&z=14&output=embed"></iframe></div>
+      <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+        <a class="btn btn-gold" href="https://maps.app.goo.gl/9yCmkrTV2Pdp77SQ8" target="_blank" rel="noopener">Traçar rota</a>
+        <a class="btn btn-outline" href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20reservar%20na%20Pousada%20e%20Restaurante%20do%20Ad%C3%A3o." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="logo" style="margin-bottom:14px"><span class="logo-mark" style="border-color:var(--gold-soft);color:var(--gold-soft)">≋</span><span><b style="color:#fff">DO ADÃO</b><small style="color:var(--gold-soft)">POUSADA • RESTAURANTE</small></span></div>
+      <p style="font-weight:300;font-size:14px;max-width:34ch">Onde o encontro vira memória: frutos do mar, coquetéis autorais e o pôr do sol mais bonito da região.</p>
+    </div>
+    <div><h4>Quick links</h4><a href="#inicio">Início</a><a href="#cardapio">Cardápio</a><a href="#suites">Suítes</a><a href="#experiencia">Experiência</a><a href="#reservar">Reservas</a></div>
+    <div><h4>Hours</h4><p style="font-size:14px">Seg–Qui • 11h30–22h<br>Sex–Sáb • 11h30–00h<br>Dom • 11h30–18h<br><br>Pousada • recepção 8h–22h</p></div>
+  </div>
+  <div class="wrap copy"><span>© <span id="year"></span> Pousada e Restaurante do Adão. Todos os direitos reservados.</span><span>Feito com sabor à beira-mar</span></div>
+</footer>
+
+<a class="wpp" href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Pousada%20do%20Ad%C3%A3o." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" width="30" height="30"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.9-1.4A10 10 0 1 0 12 2zm5.6 14.1c-.2.7-1.4 1.3-1.9 1.4-.5 0-1 .3-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .6-.5 1.1z"/></svg>
+</a>
+
+<div class="lightbox" id="lightbox"><button id="lbClose" aria-label="Fechar">✕</button><img id="lbImg" src="" alt="Foto ampliada"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+// menu mobile
+const burger=$('#burger'),mmenu=$('#mmenu');
+burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// nav ativa
+const secs=['inicio','cardapio','suites','experiencia','galeria','contato'];
+const navA=[...document.querySelectorAll('.links a')];
+addEventListener('scroll',()=>{
+  let cur='inicio';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&scrollY>=el.offsetTop-140)cur=id});
+  navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+// pré-seleciona tipo vindo das suítes
+document.querySelectorAll('[data-tipo]').forEach(a=>a.addEventListener('click',()=>{
+  const t=a.dataset.tipo;const sel=$('#fType');
+  [...sel.options].forEach(o=>{if(o.text===t)sel.value=o.value||o.text});
+  sel.value=t;
+}));
+// data mínima = hoje
+const d=$('#fDate');d.min=new Date().toISOString().split('T')[0];
+// reserva -> WhatsApp
+$('#bookForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const msg=$('#formMsg');
+  const nome=$('#fName').value.trim(),email=$('#fMail').value.trim();
+  if(nome.length<2){msg.className='form-msg err';msg.textContent='Informe seu nome para continuar.';return}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.className='form-msg err';msg.textContent='Informe um e-mail válido.';return}
+  if(!d.value){msg.className='form-msg err';msg.textContent='Escolha a data da reserva.';return}
+  const txt=`Olá! Quero reservar na Pousada e Restaurante do Adão.%0A%0ANome: ${encodeURIComponent(nome)}%0AE-mail: ${encodeURIComponent(email)}%0AData: ${d.value} às ${$('#fTime').value}%0A${encodeURIComponent($('#fGuests').value)} • ${encodeURIComponent($('#fType').value)}%0AObs: ${encodeURIComponent($('#fMsg').value||'—')}`;
+  msg.className='form-msg ok';msg.textContent=`Obrigado, ${nome.split(' ')[0]}! Abrindo o WhatsApp para confirmar sua reserva...`;
+  setTimeout(()=>window.open(`https://wa.me/5511999999999?text=${txt}`,'_blank'),800);
+});
+// lightbox
+const lb=$('#lightbox'),lbImg=$('#lbImg');
+document.querySelectorAll('#gal button').forEach(b=>b.addEventListener('click',()=>{
+  lbImg.src=b.querySelector('img').src.replace('w=900','w=1400');lb.classList.add('open');
+}));
+$('#lbClose').addEventListener('click',()=>lb.classList.remove('open'));
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open')});
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+$('#year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
